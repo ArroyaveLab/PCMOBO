@@ -1,0 +1,12 @@
+.env
+.venv/
+nohup.out
+*.nohup.log
+*.log
+runs/
+__pycache__/
+*.pyc
+*.pyo
+.ruff_cache/
+.pytest_cache/
+*.egg-info/

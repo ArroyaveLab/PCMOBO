@@ -1,0 +1,81 @@
+{
+  "dataset_name": "estm_mid_constrained_mobo_v1",
+  "dataset_version": "v1",
+  "source_workbook": "/home/sushantsinha/Desktop/APS-CBO/estm_exploration/dataset/SIMD-main/dataset/estm.xlsx",
+  "task_definition": {
+    "temperature_band": "mid",
+    "temperature_min_k": 300.0,
+    "temperature_max_k": 600.0,
+    "zt_threshold": 0.8,
+    "power_factor_threshold": 0.0012,
+    "candidate_unit": "deduplicated_formula_temperature_row",
+    "dedup_rule": "median_over_numeric_columns_first_reference_for_exact_formula_temperature_duplicates"
+  },
+  "feature_definition": {
+    "type": "anchor_descriptor_plus_temperature",
+    "columns": [
+      "feat_mean_atomic_number",
+      "feat_mean_atomic_volume",
+      "feat_mean_atomic_weight",
+      "feat_std_atomic_number",
+      "feat_std_atomic_volume",
+      "feat_std_atomic_weight",
+      "feat_max_atomic_number",
+      "feat_max_atomic_volume",
+      "feat_max_atomic_weight",
+      "feat_min_atomic_number",
+      "feat_min_atomic_volume",
+      "feat_min_atomic_weight",
+      "feat_temperature_norm"
+    ],
+    "anchor_descriptor": {
+      "aggregations": [
+        "weighted_mean",
+        "std",
+        "max",
+        "min"
+      ],
+      "elemental_properties": [
+        "atomic_number",
+        "atomic_volume",
+        "atomic_weight"
+      ],
+      "atomic_volume_fill_method": "miedema_molar_volume_then_zero"
+    }
+  },
+  "objective_columns": [
+    "obj_absS_scaled",
+    "obj_log10_sigma_scaled",
+    "obj_neg_kappa_scaled"
+  ],
+  "constraint_columns": [
+    "con_zt_slack",
+    "con_pf_slack"
+  ],
+  "objective_scaling": {
+    "scope": "full_frozen_pool",
+    "obj_absS_scaled": {
+      "raw_min": 1.0,
+      "raw_max": 1052.4
+    },
+    "obj_log10_sigma_scaled": {
+      "raw_min": -3.370692359926251,
+      "raw_max": 6.1035854930032
+    },
+    "obj_neg_kappa_scaled": {
+      "raw_min": -67.8,
+      "raw_max": -0.07
+    }
+  },
+  "constraint_thresholds": {
+    "zt_min": 0.8,
+    "power_factor_min": 0.0012
+  },
+  "counts": {
+    "row_count": 3138,
+    "unique_formula_count": 856,
+    "feasible_row_count": 144,
+    "feasible_formula_count": 74,
+    "feasible_pareto_row_count": 82
+  }
+}
